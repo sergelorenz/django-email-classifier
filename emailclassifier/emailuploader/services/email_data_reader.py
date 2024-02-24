@@ -42,8 +42,6 @@ class EmailPickleReader:
 def _extract_subject(text):
     search = re.search(SUBJECT_PATTERN, text)
     if search is not None:
-        g1 = search.group(1)
-        g2 = search.group(2)
         return search.group(1), _convert_whitespace(search.group(2))
     return '', _convert_whitespace(text)
 
