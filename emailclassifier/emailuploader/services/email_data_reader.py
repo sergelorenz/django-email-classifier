@@ -6,12 +6,14 @@ import re
 
 SUBJECT_PATTERN = re.compile(r'Subject:\s?(.*?)\n(.*)', re.DOTALL)
 
+CSV_LINE_TERMINATOR = '\r\n'
+
 
 class EmailCSVReader:
     def read_email(self, io_data: BytesIO) -> BytesIO:
         output = StringIO()
         with TextIOWrapper(io_data, encoding='utf-8') as input_file:
-            csv_reader = reader(input_file, lineterminator='\r\n')
+            csv_reader = reader(input_file, lineterminator=CSV_LINE_TERMINATOR)
             csv_writer = writer(output, quoting=QUOTE_ALL)
             for i, row in enumerate(csv_reader):
                 # skip header
