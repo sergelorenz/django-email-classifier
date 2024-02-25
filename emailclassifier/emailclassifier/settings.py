@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'emailuploader',
     'classifier',
+    'results',
     'emailclassifier.apps.MyAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
