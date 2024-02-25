@@ -23,8 +23,14 @@ class EmailFileForm(forms.ModelForm):
 
 # Register your models here.
 class EmailFileAdmin(admin.ModelAdmin):
-    list_display = ('email_file', 'file_type')
+    list_display = ('filename', 'file_type')
     form = EmailFileForm
+
+    def filename(self, obj):
+        pass
+        return os.path.basename(obj.email_file.name)
+
+    filename.short_description = 'Filename'
 
     def save_model(self, request, obj, form, change):
         file = obj.email_file.file.file

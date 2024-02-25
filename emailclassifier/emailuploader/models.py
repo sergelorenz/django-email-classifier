@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django import forms
 
@@ -18,3 +19,5 @@ class EmailFile(models.Model):
     file_type = models.CharField(max_length=10, choices=FILE_TYPES, null=True, default='.csv')
     email_file = models.FileField(upload_to='media/uploads/')
 
+    def __str__(self):
+        return os.path.basename(self.email_file.name)
