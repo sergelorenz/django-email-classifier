@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from emailuploader.models import EmailFile
 
 
@@ -16,10 +17,6 @@ CLASSIFICATION_STATUS = (
     ('ongoing', 'Ongoing'),
     ('completed', 'Completed')
 )
-EMAIL_CLASS = (
-    ('newsletter', 'Newsletter'),
-    ('regular', 'Regular Email')
-)
 
 
 # Create your models here.
@@ -33,4 +30,5 @@ class Classification(models.Model):
 class ClassificationResults(models.Model):
     email_subject = models.CharField(max_length=512)
     email_body = models.CharField(max_length=2048)
-    email_class = models.CharField(max_length=16, choices=EMAIL_CLASS, default='regular', null=True)
+    email_class = models.CharField(max_length=16, choices=[(tag.name, tag.value) for tag in settings.EMAILCLASS],
+                                   default='regular', null=True)

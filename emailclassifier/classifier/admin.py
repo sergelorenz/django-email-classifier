@@ -3,6 +3,7 @@ from django.contrib import admin
 from django import forms
 
 from .models import Classification
+from .services.file_reader import LocalFileReader
 
 
 class ClassificationForm(forms.ModelForm):
@@ -34,7 +35,11 @@ class ClassificationAdmin(admin.ModelAdmin):
 
     @admin.action(description='Perform classification on the selected items')
     def perform_classification(self, request, queryset):
-        pass
+        for obj in queryset:
+            file_path = obj.email_file.email_file.path
+            file_reader = LocalFileReader()
+            for row in file_reader.read_line(file_path):
+                pass
 
 
 admin.site.register(Classification, ClassificationAdmin)
