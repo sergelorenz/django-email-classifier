@@ -9,7 +9,7 @@ CLASSIFICATION_METHOD = (
 )
 ML_CLASSIFIER_TYPE = (
     ('none', 'None'),
-    ('lr', 'Logistic Regression'),
+    ('sklearn', 'Scikit-Learn'),
     ('keras', 'Keras DL'),
 )
 CLASSIFICATION_STATUS = (

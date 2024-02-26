@@ -6,8 +6,9 @@ from django.utils.safestring import mark_safe
 
 from .services.file_reader import LocalFileReader
 from .services.mock_classifier_service import MockClassifier
+from .services.logic_classifier_service import LogicClassifier
 from .models import Classification
-from results.models import ClassificationResults
+from results.models import ClassificationResult
 
 
 class ClassificationForm(forms.ModelForm):
@@ -57,33 +58,33 @@ class ClassificationAdmin(admin.ModelAdmin):
             messages.error(request, 'You can only select one item at a time')
             return
 
-        ClassificationResults.objects.all().delete()
+        ClassificationResult.objects.all().delete()
         Classification.objects.all().update(classification_status='not_done')
 
         for obj in queryset:
             new_results = []
-            classifier = MockClassifier()
+            classifier = LogicClassifier()
             file_path = obj.email_file.email_file.path
             file_reader = LocalFileReader()
             for row in file_reader.read_line(file_path):
                 if len(row) == 2:
                     subject, body = row
-                    email_class = classifier.classify(subject + body)
-                    result = ClassificationResults(
+                    email_class = classifier.classify(subject + '\t' + body)
+                    result = ClassificationResult(
                         email_subject=subject,
                         email_body=body,
                         email_class=email_class.name
                     )
                     new_results.append(result)
 
-            ClassificationResults.objects.bulk_create(new_results)
+            ClassificationResult.objects.bulk_create(new_results)
             self.success_message(request)
             obj.classification_status = 'completed'
             obj.save()
 
     @staticmethod
     def success_message(request):
-        link = '/admin/results/classificationresults/'
+        link = '/admin/results/classificationresult/'
         message = f'Successfully performed classification. Please see your results in <a href="{link}">Classification Results</a>'
         messages.success(request, mark_safe(message))
 
