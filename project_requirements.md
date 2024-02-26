@@ -41,6 +41,6 @@ This Django Email Classifier is a simple web application that classifies emails 
   - leave the rest as blank slate (use pass)
 #### 7. Implement admin interface for triggering classification (the classification at this point would still be a dummy)
 #### 8. Add model to monitor classification progress
-#### 9. Make the classification asynchronous, meaning the interface should not hang up when triggering the event
-#### 10. There should be progress monitoring of the status
+#### 9. (Optional) Make the classification asynchronous, meaning the interface should not hang up when triggering the event
+#### 10. (Optional - for asynchronous) There should be progress monitoring of the status
 #### 11. Implmenet admin interface for displaying classification results
