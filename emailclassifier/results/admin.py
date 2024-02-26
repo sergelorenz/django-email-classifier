@@ -16,8 +16,7 @@ class ClassificationResultsAdmin(admin.ModelAdmin):
     actions = ['export_as_csv']
 
     def truncated_email_body(self, obj):
-        return obj.email_body
-        # return Truncator(obj.email_body).words(100)
+        return Truncator(obj.email_body).words(100)
 
     truncated_email_body.short_description = 'Email Body'
 
