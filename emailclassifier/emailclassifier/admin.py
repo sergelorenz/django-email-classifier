@@ -9,3 +9,6 @@ class MyAdminSite(admin.AdminSite):
 
 customAdminSite = MyAdminSite()
 admin.site = customAdminSite
+admin.site.site_header = 'Django Email Classifier Administration'
+admin.site.site_title = 'Email Classifier Admin'
+admin.site.index_title = 'Email Classifier Admin'
