@@ -37,6 +37,8 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+## 7. **Note**: You need to create `superuser` during the first time running the application
+
 
 # How to Regenerate Migrations into one file
 From [github/mhipo1364/merge_migration.md](https://gist.github.com/mhipo1364/a55da230e1ec80bfab70e9650637bb15).
