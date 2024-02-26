@@ -1,5 +1,6 @@
+import os
 import csv
-from typing import TextIO, Generator, Protocol, Iterator, List
+from typing import Generator, Protocol, Iterator, List
 
 
 LINE_TERMINATOR = '\r\n'
@@ -15,10 +16,12 @@ class LocalFileReader:
 
     @staticmethod
     def read_line(file_path: str) -> Generator[str, None, None]:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                yield row
+        if os.path.getsize(file_path) > 0:
+            with open(file_path, 'r', encoding='utf-8') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    yield row
+        return
 
 
 class S3FileReader:

@@ -16,9 +16,15 @@ class EmailFileForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
+        if 'email_file' not in cleaned_data:
+            raise ValidationError('Error uploading file.')
+
         _, extension = os.path.splitext(cleaned_data.get('email_file').name)
         if extension != cleaned_data.get('file_type'):
             raise ValidationError('File Type does not match the uploaded file')
+
+        if cleaned_data.get('file_type') != '.csv':
+            raise ValidationError('Only CSV data can be processed for now.')
 
 
 # Register your models here.
@@ -27,10 +33,12 @@ class EmailFileAdmin(admin.ModelAdmin):
     form = EmailFileForm
 
     def filename(self, obj):
-        pass
         return os.path.basename(obj.email_file.name)
 
     filename.short_description = 'Filename'
+
+    def has_change_permission(self, request, obj=None):
+        return False
 
     def save_model(self, request, obj, form, change):
         file = obj.email_file.file.file
