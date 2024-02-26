@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib import admin
 from django.utils.text import Truncator
 
-from .models import ClassificationResults
+from .models import ClassificationResult
 
 
 # Register your models here.
@@ -16,7 +16,8 @@ class ClassificationResultsAdmin(admin.ModelAdmin):
     actions = ['export_as_csv']
 
     def truncated_email_body(self, obj):
-        return Truncator(obj.email_body).words(100)
+        return obj.email_body
+        # return Truncator(obj.email_body).words(100)
 
     truncated_email_body.short_description = 'Email Body'
 
@@ -44,4 +45,4 @@ class ClassificationResultsAdmin(admin.ModelAdmin):
         return response
 
 
-admin.site.register(ClassificationResults, ClassificationResultsAdmin)
+admin.site.register(ClassificationResult, ClassificationResultsAdmin)

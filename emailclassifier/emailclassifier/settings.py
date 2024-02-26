@@ -135,3 +135,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 class EMAILCLASS(Enum):
     NEWSLETTER = 'Newsletter'
     REGULAR = 'Regular'
+
+
+class CLASSIFICATION_METHOD(Enum):
+    LOGIC = 'Logic'
+    ML = 'ML'
+
+
+class ML_CLASSIFIER(Enum):
+    NONE = 'None'
+    SKLEARN = 'Sklearn'
+    KERAS = 'Keras'
