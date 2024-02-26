@@ -52,7 +52,7 @@ class SklearnTraining:
         print("F1 Score:", metrics.f1_score(y_test, y_pred, average='weighted'))
 
         model_name = 'sklearn_model.sav'
-        pickle.dump(text_clf, open(model_name, 'wb'))
+        # pickle.dump(text_clf, open(model_name, 'wb'))
 
 
 def run():
