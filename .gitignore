@@ -7,6 +7,5 @@ docs
 
 emailclassifier/media/uploads/*
 !emailclassifier/media/uploads/README.md
-/emailclassifier/classifier/services/ml_services/training/sklearn_model.sav
 /emailclassifier/classifier/services/ml_services/training/dataset/**/*.txt
 /emailclassifier/classifier/services/ml_services/training/dataset/**/*.csv
